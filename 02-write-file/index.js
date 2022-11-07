@@ -1,5 +1,17 @@
 const fs = require('fs');
+const readline = require('readline');
 
-fs.writeFile("./02-write-file/text.txt", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos earum vitae nemo facere, error assumenda cum placeat suscipit quas optio sint perspiciatis voluptates rem dolorem accusantium quam magni ex animi.", function(error){
-	if(error) throw error
- });
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
+
+rl.question('Enter text? ', function (text) {
+	fs.writeFile("./02-write-file/text.txt", text, function (error) {
+		if (error) throw error
+	});
+})
+
+process.on('exit', () => {
+	console.log(`Goodbye!`);
+});
