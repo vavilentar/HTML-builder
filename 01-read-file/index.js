@@ -1,7 +1,14 @@
 const fs = require('fs');
+const file = "./01-read-file/text.txt";
 
-fs.readFile("./01-read-file/text.txt", "utf8", 
-            function(error,data){
-                if(error) throw error;
-                console.log(data);
+
+const readStream = new fs.ReadStream(file, {encoding: 'utf-8'});
+
+readStream.on('readable', function(){
+    let data = readStream.read();
+    console.log(data);
+});
+ 
+readStream.on('end', function(){
+    console.log("Reading done. End of file");
 });
